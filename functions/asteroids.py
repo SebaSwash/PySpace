@@ -26,7 +26,5 @@ def generate_asteroids(amount, type=None):
             type = random.randint(0, 1)
 
         asteroids.append(asteroid.Asteroid(type))
-        print(asteroids[i].type)
-    
 
     return asteroids
