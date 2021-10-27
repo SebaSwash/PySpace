@@ -7,7 +7,7 @@ class Asteroid():
         que aparecen en la pantalla
     '''
     images_paths = ['./sprites/asteroids/asteroid1.png', './sprites/asteroids/asteroid2.png'] # Rutas de sprites de los asteroides
-    damages = [15, 30] # Posibles daños 
+    damages = [2.5, 4.5] # Posibles daños 
     velocities = [0.3, 0.35] # Posibles velocidades
     movement_types = [1, 2, 3, 4]
 
@@ -23,7 +23,7 @@ class Asteroid():
     def generate(self, type=None):
         self.type = type if type is not None else random.randint(0, 1)
         self.image = pygame.image.load(self.images_paths[self.type])
-        self.image = pygame.transform.scale(self.image, (100, 100))
+        self.image = pygame.transform.scale(self.image, (80, 80))
 
         self.damage = self.damages[self.type]
         self.velocity = self.velocities[self.type]

@@ -1,3 +1,4 @@
+import os
 import pygame
 
 class SpaceShip():
@@ -17,8 +18,14 @@ class SpaceShip():
     def __init__(self, speed=None):
         # Se genera el objeto y el rectángulo mediante la librería de PyGame
         # para utilizarlo en el juego
+
         self.image = pygame.image.load(self.image_path)
-        self.image = pygame.transform.scale(self.image, (150, 150))
+
+        self.x_scale = 70
+        self.y_scale = 140
+        self.hp = 100 # HP (vida) inicial
+
+        self.image = pygame.transform.scale(self.image, (70, 140))
 
         # Se ajusta la velocidad de movimiento del rectángulo
         self.speed = speed if speed is not None else 1
@@ -26,6 +33,7 @@ class SpaceShip():
         # Se obtiene el rectángulo en base a la imagen generada
         self.rect = self.image.get_rect()
         self.set_position(300, 600)
+        self.colliding = False # Permite determinar cuando se termina de colisionar con un objeto
     
     def set_position(self, x, y):
         '''
@@ -62,4 +70,36 @@ class SpaceShip():
         '''
 
         return (self.rect.x, self.rect.y)
+    
+
+    def check_collision(self, asteroid):
+        '''
+            Método que permite analizar con mayor precisión si existe una colisión entre un asteroide
+            y la nave del usuario
+
+            Args:
+                asteroid (object): Objeto que representa al asteroide involucrado en la colisión
+        '''
+
+        if abs(self.rect.x - asteroid.rect.x) <= 1 or abs(self.rect.y - asteroid.rect.y) <= 1:
+            if self.colliding:
+                return
+
+            # Colisión
+            self.colliding = True 
+            self.hp -= asteroid.damage # Actualización de HP según el daño del asteroide (tipo)
+
+            if self.hp <= 0:
+                # Game Over
+                self.hp = 0
+            
+            # Se inicia el efecto de sonido del impacto
+            pygame.mixer.pre_init()
+            pygame.mixer.init()
+
+            pygame.mixer.music.load(os.path.normpath(os.path.join(os.getcwd(), 'sounds/hit.mp3')))
+            pygame.mixer.music.play()
+
+        else:
+            self.colliding = False
         
