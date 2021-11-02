@@ -21,7 +21,7 @@ Please install the required modules inside of the `requirements.txt` file by usi
 
 ## Use
 
-Execute the `main.py` file using Python 3 by running one of the next commands:
+Execute the `main.py` file using Python 3 by running one of the following commands:
 
 `python main.py`
 
