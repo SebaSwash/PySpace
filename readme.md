@@ -13,7 +13,7 @@ Move your space ship along the screen trying to avoid the asteroids that moves e
 
 ## Installation
 
-Please install the required modules inside of the `requirements.txt` file by using one of the next commands:
+Please install the required modules inside of the `requirements.txt` file by using one of the following commands:
 
 `pip3 install -r requirements.txt`
 
